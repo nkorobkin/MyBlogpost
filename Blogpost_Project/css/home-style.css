@@ -33,7 +33,7 @@ section {
 }
 
 .bg-color {
-    background-color: #4c5864;
+    background-color: #293732;
 }
 
 .card-body {
@@ -43,7 +43,7 @@ section {
 }
 
 .article-header-container {
-    background-color: #343a40;
+    background-color: #282d32;
     color: #fff;
     border-radius: 0.5rem;
     padding: 1rem;
@@ -51,10 +51,12 @@ section {
 }
 
 .article-container {
-    background-image: url('/svg/layer-nav2.svg');
+    /*background-image: url('/svg/layer-nav6.svg');
     background-size: cover;
+    */
+    background-color: #74a98e9e;
     border-radius: 0.5rem;
-    padding: 1rem;
+    padding: 10px;
     font-family: 'Roboto', sans-serif;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -71,7 +73,7 @@ section {
 }
 
 .article-paragraph {
-    margin-bottom: 20px;
+    margin-bottom: 4px;
     padding: 10px;
     color: #ffffff;
 }
@@ -88,16 +90,18 @@ section {
 }
 
 .container-text {
-    background-color: #343a40;
+    background-color: #282d32;
     border-radius: 8px;
 }
 
 .footer {
-    background-color: #4c5864;
+    background-color: #152520;
     color: #fff;
     padding: 20px;
     margin-top: 40px;
-
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 .spacer-nav {
@@ -124,7 +128,7 @@ section {
 }
 
 .layer-nav {
-    background-image: url('/svg/layer-nav5.svg');
+    background-image: url('/svg/layer-nav8v4.svg');
 }
 
 .layer-body {
