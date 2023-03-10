@@ -5,23 +5,25 @@
     <meta charset="UTF-8">
     <title>My Blog</title>
     <link rel="stylesheet" href="../css/home-style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </head>
 
 <body class="bg-color">
     <header class="header">
-        <nav class="navbar navbar-expand-lg navbar-dark spacer-nav layer-nav">
+        <nav class="navbar navbar-expand-xl navbar-dark spacer-nav layer-nav">
             <a class="navbar-brand" href="#">My Blog</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mr-auto">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link text-light" href="articles.html">Articles</a>
                     </li>
@@ -39,6 +41,18 @@
             </div>
         </nav>
     </header>
+    <!--
+    <div class="articles-card-container">
+        <header>
+            <a class="nav-link text-light" href="articles.html">Articles</a>
+        </header>
+        <ul>
+            <li class="nav-item">
+
+            </li>
+        </ul>
+    </div>
+-->
     <section class="container main">
         <article class="article-container">
             <header class="article-header-container">
@@ -93,12 +107,39 @@
             </section>
         </article>
     </section>
+
+    <section class="container main">
+        <article class="article-container">
+            <header class="article-header-container">
+                <h1 class="article-title">Lorem Ipsum How You Doin?</h1>
+                <p class="article-meta">Published on January 12, 2023</p>
+            </header>
+            <section class="article-body container-text">
+                <p class="article-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+                    aliquam ipsum a nibh commodo sagittis.
+                    Sed laoreet, erat non consequat bibendum, felis ex pellentesque eros, ut convallis quam
+                    tellus eu
+                    enim. Vivamus bibendum nulla in malesuada suscipit. Suspendisse a bibendum leo.
+                    Phasellus vel dui
+                    vitae enim porttitor luctus. Integer sodales velit nisl, vel ultrices nunc dictum vitae.
+                    Donec
+                    luctus, leo eu congue varius, purus nunc efficitur elit, eu pulvinar nibh libero vel
+                    sapien. Integer
+                    quis urna eros. Nulla posuere turpis justo, non hendrerit tortor mollis vel. Etiam
+                    euismod libero
+                    ipsum, vel consectetur sapien eleifend ac. Donec sollicitudin ante sed malesuada rutrum.
+                    In hac
+                    habitasse platea dictumst.</p>
+                <p class="article-paragraph">Suspendisse potenti. Nullam sit amet</p>
+            </section>
+        </article>
+    </section>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2023 Blogpost Website</p>
+        </div>
+    </footer>
 </body>
-<footer class="footer">
-    <div class="container">
-        <p>&copy; 2023 Blogpost Website</p>
-    </div>
-</footer>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
