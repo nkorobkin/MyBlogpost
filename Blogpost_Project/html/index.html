@@ -13,7 +13,7 @@
         crossorigin="anonymous"></script>
 </head>
 
-<body class="main">
+<body>
     <nav class="navbar navbar-expand-xl navbar-dark spacer-nav layer-nav">
         <a class="navbar-brand" href="#">My Blog</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -42,7 +42,7 @@
     <div class="main-content-flex">
         <div class="article-card-flex">
             <article class="article-card-container">
-                <header class="article-header-container">
+                <header class="articles-card-header-container">
                     <h1 class="article-card-title">Trending Blogs </h1>
                     <hr>
                     <p><a class="nav-link text-light" href="articles.html">Articles <svg
@@ -56,17 +56,19 @@
                                 </path>
                             </svg></a></p>
                 </header>
-                <section class="article-body container-text">
-                    <p class="article-paragraph">Lorem ipsum dolor </p>
+                <div class="card-content-section">
+                    <section>
+                        <p class="articles-card-paragraph">Lorem ipsum dolor </p>
 
-                </section>
-                <section class="article-body container-text">
-                    <p class="article-paragraph">Suspendisse potenti. Nullam sit amet</p>
-                </section>
-                <section class="article-body container-text">
+                    </section>
+                    <section>
+                        <p class="articles-card-paragraph">Suspendisse potenti</p>
+                    </section>
+                    <section>
 
-                    <p class="article-paragraph">Suspendisse potenti. Nullam sit amet</p>
-                </section>
+                        <p class="articles-card-paragraph">Suspendisse potenti. Nullam sit amet</p>
+                    </section>
+                </div>
             </article>
         </div>
 
@@ -90,7 +92,7 @@
             </section>
 
 
-            <section class="container main">
+            <section class="container">
                 <article class="article-container">
                     <header class="article-header-container">
                         <h1 class="article-title">Lorem Ipsum How You Doin?</h1>
@@ -117,7 +119,7 @@
                 </article>
             </section>
 
-            <section class="container main">
+            <section class="container">
                 <article class="article-container">
                     <header class="article-header-container">
                         <h1 class="article-title">Lorem Ipsum How You Doin?</h1>
@@ -162,12 +164,12 @@
                 </article>
             </section>
         </div>
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2023 Blogpost Website</p>
+            </div>
+        </footer>
     </div>
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2023 Blogpost Website</p>
-        </div>
-    </footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
