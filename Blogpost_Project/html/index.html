@@ -13,43 +13,40 @@
         crossorigin="anonymous"></script>
 </head>
 
-<body class="bg-color">
-    <header class="header">
-        <nav class="navbar navbar-expand-xl navbar-dark spacer-nav layer-nav">
-            <a class="navbar-brand" href="#">My Blog</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="articles.html">Articles</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="about.html">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="profile.html">Profile</a>
-                    </li>
-                </ul>
-                <div class="my-2 my-lg-0">
-                    <a href="auth.html" class="btn btn-outline-light mr-2">Login</a>
-                    <a href="signUp.html" class="btn btn-primary">Sign up</a>
-                </div>
+<body>
+    <nav class="navbar navbar-expand-xl navbar-dark spacer-nav layer-nav">
+        <a class="navbar-brand" href="#">My Blog</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="articles.html">Articles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="about.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="profile.html">Profile</a>
+                </li>
+            </ul>
+            <div class="my-2 my-lg-0">
+                <a href="auth.html" class="btn btn-outline-light mr-2">Login</a>
+                <a href="signUp.html" class="btn btn-primary">Sign up</a>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
-    <div class="main-flex">
+    <div class="main-content-flex">
         <div class="article-card-flex">
             <article class="article-card-container">
-                <header class="article-header-container">
+                <header class="articles-card-header-container">
                     <h1 class="article-card-title">Trending Blogs </h1>
                     <hr>
                     <p><a class="nav-link text-light" href="articles.html">Articles <svg
-                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                 class="bi bi-journals" viewBox="0 0 16 16">
                                 <path
                                     d="M5 0h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2 2 2 0 0 1-2 2H3a2 2 0 0 1-2-2h1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1H1a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v9a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1H3a2 2 0 0 1 2-2z">
@@ -59,17 +56,19 @@
                                 </path>
                             </svg></a></p>
                 </header>
-                <section class="article-body container-text">
-                    <p class="article-paragraph">Lorem ipsum dolor </p>
+                <div class="card-content-section">
+                    <section>
+                        <p class="articles-card-paragraph">Lorem ipsum dolor </p>
 
-                </section>
-                <section class="article-body container-text">
-                    <p class="article-paragraph">Suspendisse potenti. Nullam sit amet</p>
-                </section>
-                <section class="article-body container-text">
+                    </section>
+                    <section>
+                        <p class="articles-card-paragraph">Suspendisse potenti</p>
+                    </section>
+                    <section>
 
-                    <p class="article-paragraph">Suspendisse potenti. Nullam sit amet</p>
-                </section>
+                        <p class="articles-card-paragraph">Suspendisse potenti. Nullam sit amet</p>
+                    </section>
+                </div>
             </article>
         </div>
 
@@ -81,28 +80,19 @@
                         <p class="article-meta">Published on January 1, 2023</p>
                     </header>
                     <section class="article-body container-text">
-                        <p class="article-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                            aliquam ipsum a nibh commodo sagittis.
-                            Sed laoreet, erat non consequat bibendum, felis ex pellentesque eros, ut convallis quam
-                            tellus eu
-                            enim. Vivamus bibendum nulla in malesuada suscipit. Suspendisse a bibendum leo.
-                            Phasellus vel dui
-                            vitae enim porttitor luctus. Integer sodales velit nisl, vel ultrices nunc dictum vitae.
-                            Donec
-                            luctus, leo eu congue varius, purus nunc efficitur elit, eu pulvinar nibh libero vel
-                            sapien. Integer
-                            quis urna eros. Nulla posuere turpis justo, non hendrerit tortor mollis vel. Etiam
-                            euismod libero
-                            ipsum, vel consectetur sapien eleifend ac. Donec sollicitudin ante sed malesuada rutrum.
-                            In hac
-                            habitasse platea dictumst.</p>
+                        <p class="article-paragraph">Chicharrones try-hard polaroid shabby chic hashtag cronut, bicycle
+                            rights XOXO tote bag seitan master cleanse messenger bag. Bruh asymmetrical YOLO pop-up
+                            tacos meggings, drinking vinegar craft beer freegan. Bushwick echo park typewriter
+                            live-edge. Everyday carry tousled man braid, woke squid hexagon tumeric artisan truffaut
+                            schlitz iceland cardigan tilde. Vexillologist narwhal asymmetrical bruh thundercats, selfies
+                            helvetica shoreditch.</p>
                         <p class="article-paragraph">Suspendisse potenti. Nullam sit amet</p>
                     </section>
                 </article>
             </section>
 
 
-            <section class="container main">
+            <section class="container">
                 <article class="article-container">
                     <header class="article-header-container">
                         <h1 class="article-title">Lorem Ipsum How You Doin?</h1>
@@ -129,7 +119,7 @@
                 </article>
             </section>
 
-            <section class="container main">
+            <section class="container">
                 <article class="article-container">
                     <header class="article-header-container">
                         <h1 class="article-title">Lorem Ipsum How You Doin?</h1>
@@ -151,17 +141,35 @@
                             ipsum, vel consectetur sapien eleifend ac. Donec sollicitudin ante sed malesuada rutrum.
                             In hac
                             habitasse platea dictumst.</p>
+                        <p class="article-paragraph">Suspendisse potenti. Nullam sit amet</p>
+                    </section>
+                </article>
+            </section>
+
+            <section class="container">
+                <article class="article-container">
+                    <header class="article-header-container">
+                        <h1 class="article-title">My First Blog Post</h1>
+                        <p class="article-meta">Published on January 1, 2023</p>
+                    </header>
+                    <section class="article-body container-text">
+                        <p class="article-paragraph">Chicharrones try-hard polaroid shabby chic hashtag cronut, bicycle
+                            rights XOXO tote bag seitan master cleanse messenger bag. Bruh asymmetrical YOLO pop-up
+                            tacos meggings, drinking vinegar craft beer freegan. Bushwick echo park typewriter
+                            live-edge. Everyday carry tousled man braid, woke squid hexagon tumeric artisan truffaut
+                            schlitz iceland cardigan tilde. Vexillologist narwhal asymmetrical bruh thundercats, selfies
+                            helvetica shoreditch.</p>
                         <p class="article-paragraph">Suspendisse potenti. Nullam sit amet</p>
                     </section>
                 </article>
             </section>
         </div>
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2023 Blogpost Website</p>
+            </div>
+        </footer>
     </div>
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2023 Blogpost Website</p>
-        </div>
-    </footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
