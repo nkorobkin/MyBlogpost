@@ -10,50 +10,70 @@
 </head>
 
 <body>
-    <header class="header">
-
-        <nav class="navbar navbar-expand-lg navbar-dark">
-            <a class="navbar-brand" href="index.html">My Blog</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="about.html">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="profile.html">Profile</a>
-                    </li>
-                </ul>
-                <div class="my-2 my-lg-0">
-                    <a href="#" class="btn btn-outline-light mr-2">Login</a>
-                    <a href="#" class="btn btn-primary">Sign up</a>
-                </div>
+    <nav class="navbar navbar-expand-xl navbar-dark spacer-nav layer-nav">
+        <a class="navbar-brand" href="index.html">My Blog</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="articles.html"><svg xmlns="http://www.w3.org/2000/svg"
+                            width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
+                            <path
+                                d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z" />
+                        </svg> Articles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="about.html"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                            height="16" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+                            <path
+                                d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z" />
+                        </svg> About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="profile.html"><svg xmlns="http://www.w3.org/2000/svg"
+                            width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                            <path fill-rule="evenodd"
+                                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                        </svg> Profile</a>
+                </li>
+            </ul>
+            <div class="my-2 my-lg-0">
+                <a href="auth.html" class="btn btn-outline-light mr-2">Login</a>
+                <a href="signUp.html" class="btn btn-primary">Sign up</a>
             </div>
-        </nav>
-    </header>
-    <main class="main">
-        <div class="container">
-            <h1 class="articles-header">Articles by Other Users</h1>
-            <div class="articles-container">
-                <div class="article-card">
-                    <h2 class="article-card-title">How to Train for a Marathon</h2>
-                    <p class="article-card-meta">By: John Doe | Published on: February 1, 2023</p>
-                    <p class="article-card-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Nunc aliquam ipsum a nibh commodo sagittis. Sed laoreet, erat non consequat bibendum, felis ex
-                        pellentesque eros, ut convallis quam tellus eu enim.</p>
-                    <a href="#" class="btn btn-primary">Read More</a>
+        </div>
+    </nav>
+
+    <div class="main-content-flex">
+        <div class="article-col-flex">
+            <div class="article-card-container">
+                <h1 class="articles-header">Articles by Other Users</h1>
+                <div class="article-container">
+                        <h2 class="article-card-title">How to Train for a Marathon</h2>
+                        <p class="article-card-meta">By: John Doe | Published on: February 1, 2023</p>
+                        <p class="article-card-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Nunc aliquam ipsum a nibh commodo sagittis. Sed laoreet, erat non consequat bibendum, felis
+                            ex
+                            pellentesque eros, ut convallis quam tellus eu enim.</p>
+                        <a href="#" class="btn btn-primary">Read More</a>
+                    </div>
                 </div>
-                <div class="article-card">
+                <div class="article-card-container">
                     <h2 class="article-card-title">The Benefits of Meditation</h2>
-                    <p class="article-card-meta">By: Jane Smith | Published on: February 3, 2023</p>
-                    <p class="article-card-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Nunc aliquam ipsum a nibh commodo sagittis. Sed laoreet, erat non consequat bibendum, felis ex
-                        pellentesque eros, ut convallis quam tellus eu enim.</p>
-                    <a href="#" class="btn btn-primary">Read More</a>
+                    <div class="article-container">
+                        <p class="article-card-meta">By: Jane Smith | Published on: February 3, 2023</p>
+                        <p class="article-card-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Nunc aliquam ipsum a nibh commodo sagittis. Sed laoreet, erat non consequat bibendum, felis
+                            ex
+                            pellentesque eros, ut convallis quam tellus eu enim.</p>
+                        <a href="#" class="btn btn-primary">Read More</a>
+                    </div>
                 </div>
-                <div class="article-card">
+                <div class="article-card-container">
                     <h2 class="article-card-title">Healthy Eating Habits for Busy People</h2>
                     <p class="article-card-meta">By: Sarah Johnson | Published on: February 5, 2023</p>
                     <p class="article-card-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -63,12 +83,12 @@
                 </div>
             </div>
         </div>
-    </main>
-    <footer class="footer">
-        <div class="container">
-            <p>© 2023 My Blog</p>
-        </div>
-    </footer>
+        <footer class="footer">
+            <div class="container">
+                <p>© 2023 My Blog</p>
+            </div>
+        </footer>
+    </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
