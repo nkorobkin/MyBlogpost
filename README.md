@@ -25,5 +25,5 @@ We are going to create a blogging website that will allow registered users to cr
 
 ###### Students
 
-Nikita Korobkin (13290333);
+Nikita K;
 Yegor S
