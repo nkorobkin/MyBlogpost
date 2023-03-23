@@ -115,13 +115,13 @@ body {
     line-height: 1.6;
 }
 
-.comment-form-flex{
+.comment-form-flex {
     margin-top: 10px;
     display: flex;
     flex-direction: column;
 }
 
-.comment-submit{
+.comment-submit {
     background: rgba(65, 75, 134, 0);
     padding: 15px;
     border-radius: 10px;
@@ -130,10 +130,10 @@ body {
     width: 100px;
     margin-top: 10px;
     color: #ffffff;
-    
+
 }
 
-.comment-input{
+.comment-input {
     background: rgba(0, 0, 0, 0.027);
     padding: 15px;
     border-radius: 10px;
@@ -155,6 +155,8 @@ body {
     display: flex;
     align-items: flex-start;
     gap: 15px;
+    margin-top: 25px;
+    margin-bottom: 25px;
 }
 
 .comment-author-icon {
@@ -168,15 +170,15 @@ body {
 }
 
 .comment-content {
-    
+
     padding: 15px;
     border-radius: 10px;
-    
+
     width: 788px;
     color: #f1eeeefb;
     line-height: 1.6;
 }
 
-#comment-date{
+#comment-date {
     margin-left: 50px;
 }
