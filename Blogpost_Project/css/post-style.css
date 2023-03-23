@@ -17,7 +17,7 @@ body {
 /* Navbar */
 .navbar {
     background-color: rgba(0, 0, 0, 0.6);
-    
+
     margin-top: 0px;
     padding: 20px;
     backdrop-filter: blur(16px) saturate(180%);
@@ -28,16 +28,14 @@ body {
 }
 
 /* Main content */
-.main-content-flex {
-    
-}
+.main-content-flex {}
 
-.profile-card-flex{
+.profile-card-flex {
     display: flex;
     flex-direction: column;
     border-radius: 15px;
     margin-top: 25px;
-    position: fixed;
+    position: absolute;
     align-items: center;
     margin-left: 80px;
     padding: 5px;
@@ -57,7 +55,6 @@ body {
     border-radius: 10px;
     padding: 20px;
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Article page */
@@ -70,16 +67,17 @@ body {
     margin-top: 0px;
     position: relative;
 }
+
 .article-container {
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 800px;
+    max-width: 1000px;
     margin-bottom: 50px;
 }
-.article-content{
-    
-}
+
+.article-content {}
+
 .article-header {
     display: flex;
     align-items: center;
@@ -104,6 +102,7 @@ body {
 
 .article-meta {
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
     margin-top: 15px;
@@ -116,20 +115,46 @@ body {
     line-height: 1.6;
 }
 
-.comment-section {
-    margin-top: 30px;
+.comment-form-flex{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
-.comment-section h3 {
+.comment-submit{
+    background: rgba(65, 75, 134, 0);
+    padding: 15px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(10, 10, 10, 0);
+    width: 100px;
+    margin-top: 10px;
+    color: #ffffff;
+    
+}
+
+.comment-input{
+    background: rgba(0, 0, 0, 0.027);
+    padding: 15px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(10, 10, 10, 0);
+    width: 100%;
     color: #fff;
-    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.comment-section {
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+    margin-bottom: 45px;
 }
 
 .comment {
     display: flex;
     align-items: flex-start;
     gap: 15px;
-    margin-bottom: 15px;
 }
 
 .comment-author-icon {
@@ -143,12 +168,15 @@ body {
 }
 
 .comment-content {
-    background: rgba(255, 255, 255, 0.1);
+    
     padding: 15px;
     border-radius: 10px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    width: 100%;
-    color: #fff;
+    
+    width: 788px;
+    color: #f1eeeefb;
     line-height: 1.6;
+}
+
+#comment-date{
+    margin-left: 50px;
 }
