@@ -123,11 +123,11 @@ body {
 
 .comment-submit {
     background: rgba(65, 75, 134, 0);
-    padding: 15px;
-    border-radius: 10px;
+    padding: 10px 15px;
+    border-radius: 22px;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(10, 10, 10, 0);
-    width: 100px;
+    width: fit-content;
     margin-top: 10px;
     color: #ffffff;
 
@@ -177,6 +177,26 @@ body {
     width: 788px;
     color: #f1eeeefb;
     line-height: 1.6;
+}
+
+.reply-btn {
+    background: rgba(109, 121, 187, 0.144);
+    padding: 10px 15px;
+    border-radius: 22px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(10, 10, 10, 0);
+    width: fit-content;
+    margin-top: 10px;
+    color: #ffffff;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.reply-icon {
+    width: 20px;
+    height: 20px;
 }
 
 #comment-date {

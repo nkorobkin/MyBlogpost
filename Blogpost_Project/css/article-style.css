@@ -245,6 +245,7 @@ body {
     height: 110px;
     color: #bba62f;
     margin-right: 10px;
+    min-width: 60px;
 }
 
 .article-card-body {
@@ -272,6 +273,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    margin-left: 62px;
 }
 
 .meta-item {
@@ -282,6 +284,11 @@ body {
 .meta-icon {
     width: 25px;
     height: 25px;
+}
+
+.meta-item-poster {
+    font-size: 14px;
+    margin-right: 0;
 }
 
 /* Styles for the footer */
