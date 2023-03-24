@@ -7,6 +7,72 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    max-height: fit-content;
-    min-height: fit-content;
+
+}
+
+.user-form {
+    width: 550px;
+    min-width: 550px;
+    margin-bottom: 260px;
+}
+
+.profile-picture-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 550px;
+}
+
+.profile-picture-container {
+    margin-bottom: 20px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+#profile-picture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.change-picture-btn {
+    background: rgba(109, 121, 187, 0.232);
+    padding: 10px 15px;
+    border-radius: 22px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(10, 10, 10, 0);
+    color: #ffffff;
+    cursor: pointer;
+}
+
+
+.card-flex {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.update-btn {
+    background: rgba(109, 121, 187, 0.232);
+    padding: 10px 15px;
+    border-radius: 22px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(10, 10, 10, 0);
+    width: fit-content;
+    margin-top: 10px;
+    color: #ffffff;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
 }

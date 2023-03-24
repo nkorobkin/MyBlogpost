@@ -40,8 +40,16 @@
             </div>
         </div>
     </nav>
-    <div class="main" style="padding-top:660px; color:#f3eeeef4; padding-bottom:100px;">
-        <div class="container">
+    <div class="main" style="padding-top:200px; color:#f3eeeef4; padding-bottom:100px;">
+        <div class="user-form">
+            <div class="profile-picture-card">
+                <div class="profile-picture-container">
+                    <img id="profile-picture" src="https://via.placeholder.com/150" alt="Profile picture" />
+                </div>
+                <input type="file" id="input-picture" accept="image/*" style="display:none">
+                <button type="button" class="change-picture-btn">Change Picture</button>
+            </div>
+
             <div class="card-flex">
                 <h5 class="card-title">User Profile</h5>
                 <form>
@@ -60,16 +68,28 @@
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
                         <label class="form-check-label" for="exampleCheck1">Check me out</label>
                     </div>
-                    <button type="submit" class="btn btn-primary">Update Profile</button>
+                    <button type="submit" class="update-btn">Update Profile</button>
                 </form>
             </div>
         </div>
     </div>
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; My Blog 2023</p>
-        </div>
-    </footer>
+    <script>
+        document.querySelector('.change-picture-btn').addEventListener('click', () => {
+            document.getElementById('input-picture').click();
+        });
+
+        document.getElementById('input-picture').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    document.getElementById('profile-picture').src = reader.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+
 </body>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
