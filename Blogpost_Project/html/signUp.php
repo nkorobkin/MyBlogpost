@@ -17,7 +17,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
         mysqli_query($conn, $query);
 
-        header("Location: login.php");
+        header("Location: auth.php");
         die;
     } else {
         echo "Please enter valid information!";

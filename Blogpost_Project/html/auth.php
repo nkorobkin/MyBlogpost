@@ -1,3 +1,44 @@
+<?php
+
+session_start();
+
+include("config.php");
+// include("functions.php");
+
+
+if($_SERVER['REQUEST_METHOD'] == "POST") {
+    $user_name = $_POST['user_name'];
+    $password = $_POST['password'];
+
+
+    if(!empty($user_name) && !empty($password)) {
+
+        //Here we will be reading from the database
+        $query = "select * from users where username = '$user_name' limit 1";
+        $result = mysqli_query($conn, $query);
+
+        if($result) {
+            if($result && mysqli_num_rows($result) > 0) {
+                $user_data = mysqli_fetch_assoc($result);
+
+                if($user_data['password'] === $password) {
+
+                    //$_SESSION['id'] = $user_data['id'];
+                    header("Location: index.php");
+                    die;
+
+                }
+            }
+        }
+        echo "Wrong username or password! Try Again.";
+
+    }
+} else {
+    echo "Enter the correct creditenials!";
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,14 +60,15 @@
         <div class="row justify-content-center">
             <div class="col-sm-6 col-md-4">
                 <h1 class="text-center mb-4">Login</h1>
-                <form class="login-form">
+                <form class="login-form" method="post">
                     <div class="mb-3">
-                        <label for="inputEmail" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="inputEmail" required>
+                        <!-- Changed so that the user can sign-in via his username. Later on I can add so that both options will be available.  -->
+                        <label for="inputEmail" class="form-label">Username</label>
+                        <input type="text" name="user_name" class="form-control" id="inputEmail" required>
                     </div>
                     <div class="mb-3">
                         <label for="inputPassword" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="inputPassword" required>
+                        <input type="password" name="password" class="form-control" id="inputPassword" required>
                     </div>
                     <div class="d-grid gap-2 mb-3">
                         <button type="submit" class="btn btn-primary">Sign in</button>
@@ -34,7 +76,7 @@
                 </form>
                 <div class="text-center mb-3">
                     <p class="text-muted">Don't have an account?</p>
-                    <a href="signUp.html" class="btn btn-secondary">Sign up</a>
+                    <a href="signUp.php" class="btn btn-secondary">Sign up</a>
                 </div>
                 <div class="text-center">
                     <a href="forgotPw.html" class="text-muted">Forgot password?</a>
