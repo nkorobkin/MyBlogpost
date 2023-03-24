@@ -28,11 +28,12 @@ button {
     -webkit-backdrop-filter: blur(16px) saturate(180%);
     background-color: rgba(17, 25, 40, 0.61);
     border: 1px solid rgba(255, 255, 255, 0.048);
+    heigh: 80px;
     z-index: 2;
 }
 
 /* Main content */
-.main-content-flex {}
+
 
 .profile-card-flex {
     display: flex;
@@ -80,7 +81,7 @@ button {
     margin-bottom: 50px;
 }
 
-.article-content {}
+
 
 .article-header {
     display: flex;
@@ -206,4 +207,3 @@ button {
 #comment-date {
     margin-left: 50px;
 }
-

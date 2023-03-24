@@ -12,7 +12,6 @@
 
     const bookmark_btn = document.querySelector('#bookmark-btn');
     let marked = false
-
     bookmark_btn.addEventListener('click', () => {
         if (!marked) {
             document.querySelector('#bookmark-icon').style.fill = '#ECC20C'
