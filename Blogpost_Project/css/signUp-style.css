@@ -1,6 +1,7 @@
 /* Global styles */
 body {
-    background-color: #f8f9fa;
+    background: linear-gradient(180deg, #110d50, #000000);
+    min-height: 100vh;
 }
 
 .header {
@@ -37,9 +38,32 @@ body {
 }
 
 /* Sign up page styles */
-.sign-up-form-container {
-    background-color: #ffffff;
+.form-flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 20px;
+    color: #f3f0f0;
+    font-family: 'Roboto', sans-serif;
     border-radius: 5px;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    padding-bottom: 200px;
+    width: 80%;
+    margin-left: 200px;
+}
+
+.signUp-btn {
+    background: rgba(109, 121, 187, 0.232);
+    padding: 10px 15px;
+    border-radius: 22px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(10, 10, 10, 0);
+    width: fit-content;
+    margin-top: 10px;
+    color: #ffffff;
+    margin-left: 44%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
 }
