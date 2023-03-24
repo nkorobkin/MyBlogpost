@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Article | My Blog</title>
+    <title>Post | My Blog</title>
     <link rel="stylesheet" href="../css/post-style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -99,12 +99,14 @@
                     </div>
                     <div class="article-meta">
                         <div class="meta-item">
-                            <svg id="like-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                            </svg>
-                            <span>333</span>
+                            <button id="like-btn">
+                                <svg id="like-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <span id="like-counter">333</span>
                         </div>
                         <div class="meta-item">
                             <svg id="comment-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -115,11 +117,13 @@
                             <span>2</span>
                         </div>
                         <div class="meta-item">
-                            <svg id="bookmark-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
-                            </svg>
+                            <button id="bookmark-btn">
+                                <svg id="bookmark-icon" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
+                                </svg>
+                            </button>
                         </div>
                         <div class="meta-item">
                             <span>· 17/03/2023</span>
@@ -149,45 +153,13 @@
                             fuel that's gonna make those fossil-fuel loving luddites choke on their ignorance! Viva
                             La
                             Vegan Vendetta, am I right?!</p>
-                        <div class="reply-btn">
+                        <button class="reply-btn">
                             <svg class="reply-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
                             </svg><span> Reply</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="comment">
-                    <div class="article-profile-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-7 h-7">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                    </div>
-                    <div class="comment-content">
-                        <p>User2<span id="comment-date">· 18/03/2023</span></p>
-                        <p class="comment-text">Great article! Thanks for sharing. Vegan diesel should reach the
-                            masses,
-                            its revolutionary and those luddites have no idea! Viva La Vegan Vendetta!!</p>
-                    </div>
-                </div>
-                <div class="comment">
-                    <div class="article-profile-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-7 h-7">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                    </div>
-                    <div class="comment-content">
-                        <p>Mega-Vedge<span id="comment-date">· 18/03/2023</span></p>
-                        <p class="comment-text">Rise up, you lazy Vegans! The V is calling, and it's time to assemble
-                            our mighty plant-based armada! Together, we shall sail the seas of soy milk and conquer the
-                            world with our legume-powered lasers! Prepare your quinoa cannons and avocado missiles,
-                            comrades, for a new dawn of veggie dominance is upon us! Let's show them the true power of
-                            the V and make the planet a cruelty-free utopia!</p>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -201,5 +173,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
+<script src="../js/app.js" defer></script>
 
 </html>
