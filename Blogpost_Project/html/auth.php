@@ -34,7 +34,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
 
     }
 } else {
-    echo "Enter the correct creditenials!";
+    // echo "Enter the correct creditenials!";
 }
 ?>
 
