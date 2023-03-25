@@ -3,7 +3,7 @@
 session_start();
 
 include("config.php");
-// include("functions.php");
+//include("functions.php");
 
 
 if($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -23,8 +23,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
 
                 if($user_data['password'] === $password) {
 
-                    //$_SESSION['id'] = $user_data['id'];
-                    header("Location: index.php");
+                    $_SESSION['id'] = $user_data['id'];
+                    header("Location: library.php");
                     die;
 
                 }
