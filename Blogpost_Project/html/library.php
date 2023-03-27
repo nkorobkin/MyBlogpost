@@ -7,6 +7,11 @@ include("functions.php");
 
 $user_data = check_login($conn);
 
+// $logged_user = $user_data['id']; 
+
+$query = "SELECT p.id, p.title, p.content, p.created_at, u.fullname FROM posts p INNER JOIN users u ON p.user_id = u.id WHERE p.user_id = '$user_data[id]' ORDER BY p.created_at DESC";
+$result = mysqli_query($conn, $query);
+
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +27,7 @@ $user_data = check_login($conn);
 
 <body>
     <nav class="navbar navbar-expand-xl navbar-dark spacer-nav layer-nav">
-        <a class="navbar-brand" href="index.html">My Blog</a>
+        <a class="navbar-brand" href="index.php">My Blog</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -46,8 +51,8 @@ $user_data = check_login($conn);
                 </li>
             </ul>
             <div class="my-2 my-lg-0">
-                <a href="auth.html" class="btn btn-outline-light mr-2">Login</a>
-                <a href="signUp.html" class="btn btn-primary">Sign up</a>
+                <a href="auth.php" class="btn btn-outline-light mr-2">Login</a>
+                <a href="signUp.php" class="btn btn-primary">Sign up</a>
             </div>
         </div>
     </nav>
@@ -60,8 +65,10 @@ $user_data = check_login($conn);
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg></a>
-                    
-                <a href="profile.html" class="profile-name"><?php echo $user_data['fullname']; ?></a>
+
+                <a href="profile.html" class="profile-name">
+                    <?php echo $user_data['fullname']; ?>
+                </a>
             </div>
 
             <div class="profile-meta">
@@ -103,7 +110,73 @@ $user_data = check_login($conn);
                     <p><a>Discussions</a></p>
                 </div>
             </div>
-            <div class="article-card">
+
+            <!-- Fetching user's article from the db -->
+            <?php if ($result && mysqli_num_rows($result) > 0): ?>
+                <?php while ($row = $result->fetch_assoc()): ?>
+
+                    <div class="article-card">
+                        <div class="article-card-structure">
+                            <div class="article-profile-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor" class="w-7 h-7">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                            </div>
+                            <div class="article-card-body">
+                                <div class="article-card-title">
+                                    <p><a href="post.html">
+                                            <?php echo htmlspecialchars($row["title"]); ?>
+                                        </a></p>
+                                </div>
+                                <div class="article-card-text">
+                                    <p>
+                                        <?php echo htmlspecialchars($row["content"]); ?>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="article-card-meta">
+                            <div class="meta-item">
+                                <svg id="like-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                                <span>333</span>
+                            </div>
+                            <div class="meta-item">
+                                <svg id="comment-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+                                </svg>
+                                <span>2</span>
+                            </div>
+                            <div class="meta-item">
+                                <svg id="bookmark-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
+                                </svg>
+                            </div>
+                            <div class="meta-item meta-item-poster">
+                                <p class="poster">Posted by: <span>
+                                        <?php echo htmlspecialchars($row["fullname"]); ?> on
+                                        <?php echo date("F j, Y, g:i a", strtotime($row["created_at"])); ?>
+                                    </span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                <?php endwhile; ?>
+            <?php else: ?>
+                <p class="article-paragraph">No posts found.</p>
+            <?php endif; ?>
+            <?php $conn->close(); ?>
+
+            <!-- <div class="article-card">
                 <div class="article-card-structure">
                     <div class="article-profile-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -369,16 +442,16 @@ $user_data = check_login($conn);
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
-        <!--Articles End-->
-    </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+            <!--Articles End-->
+        </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
 
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

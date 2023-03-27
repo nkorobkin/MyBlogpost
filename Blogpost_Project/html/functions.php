@@ -1,5 +1,4 @@
 <?php
-
 function check_login($conn) {
 
     if(isset($_SESSION['id'])) {
@@ -15,10 +14,7 @@ function check_login($conn) {
         }
 
     }
-
     // header("Location: auth.php");
     // die;
-
 }
-
 ?>
