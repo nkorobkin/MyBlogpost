@@ -15,6 +15,9 @@ function check_login($conn) {
 
     }
     // header("Location: auth.php");
-    // die;
+
+    //!I will need to comment this out in case something breaks.
+    die;
 }
+
 ?>

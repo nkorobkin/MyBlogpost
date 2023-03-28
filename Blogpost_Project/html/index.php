@@ -3,6 +3,8 @@
 session_start();
 
 include("config.php");
+include("functions.php");
+
 
 $query = "SELECT p.id, p.title, p.content, p.created_at, u.fullname FROM posts p INNER JOIN users u ON p.user_id = u.id ORDER BY p.created_at DESC";
 $result = mysqli_query($conn, $query);
@@ -22,6 +24,25 @@ $result = mysqli_query($conn, $query);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+
+    <!-- //!I have no idea why is it not working and how to implement ajax properly in this case. -->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script> -->
+
+    <!-- <script>
+        //jQuery for ajax
+        $(document).ready(function () {
+            var postsCount = 2;
+            $("#more_posts").click(function () {
+                postsCount = postsCount + 2;
+                $("#posts").load("load-posts.php", {
+                    postsNewCount: postsCount
+                });
+            });
+        })
+    </script> -->
+
 </head>
 
 <body>
@@ -34,8 +55,8 @@ $result = mysqli_query($conn, $query);
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="library.php"><svg xmlns="http://www.w3.org/2000/svg"
-                            width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
+                    <a class="nav-link text-light" href="library.php"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                            height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
                             <path
                                 d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z" />
                         </svg> My Library</a>
@@ -56,10 +77,24 @@ $result = mysqli_query($conn, $query);
                         </svg> Profile</a>
                 </li>
             </ul>
-            <div class="my-2 my-lg-0">
-                <a href="auth.php" class="btn btn-outline-light mr-2">Login</a>
-                <a href="signUp.php" class="btn btn-primary">Sign up</a>
-            </div>
+
+            <!-- This will check if the user is logged, and change navbar accordingly -->
+            <?php if (isset($_SESSION['id'])): ?>
+
+                <div class="my-2 my-lg-0">
+                    <a href="logout.php" class="btn btn-outline-light mr-2">Logout</a>
+                </div>
+
+            <?php else: ?>
+
+                <div class="my-2 my-lg-0">
+                    <a href="auth.php" class="btn btn-outline-light mr-2">Login</a>
+                    <a href="signUp.php" class="btn btn-primary">Sign up</a>
+                </div>
+
+            <?php endif; ?>
+
+
         </div>
     </nav>
 
@@ -87,7 +122,8 @@ $result = mysqli_query($conn, $query);
 
         </div>
 
-        <div class="article-col-flex">
+        <!-- I've added id for the load function to work  -->
+        <div id="posts" class="article-col-flex">
 
             <!-- Fetching posts from db -->
             <?php if ($result && mysqli_num_rows($result) > 0): ?>
@@ -112,103 +148,14 @@ $result = mysqli_query($conn, $query);
                     </section>
                 <?php endwhile; ?>
             <?php else: ?>
-                <p class="article-paragraph">No posts found.</p>
+                <p class="article-paragraph">No posts found!</p>
             <?php endif; ?>
             <?php $conn->close(); ?>
 
-
-            <!-- <section class="container">
-                <article class="article-container">
-                    <header class="article-header-container">
-                        <h1 class="article-title">My First Blog Post</h1>
-                        <p class="article-meta">Published on January 1, 2023</p>
-                    </header>
-                    <section class="article-body container-text">
-                        <p class="article-paragraph">Chicharrones try-hard polaroid shabby chic hashtag cronut, bicycle
-                            rights XOXO tote bag seitan master cleanse messenger bag. Bruh asymmetrical YOLO pop-up
-                            tacos meggings, drinking vinegar craft beer freegan. Bushwick echo park typewriter
-                            live-edge. Everyday carry tousled man braid, woke squid hexagon tumeric artisan truffaut
-                            schlitz iceland cardigan tilde. Vexillologist narwhal asymmetrical bruh thundercats, selfies
-                            helvetica shoreditch.</p>
-                        <p class="article-paragraph">Suspendisse potenti. Nullam sit amet</p>
-                    </section>
-                </article>
-            </section>
-
-
-            <section class="container">
-                <article class="article-container">
-                    <header class="article-header-container">
-                        <h1 class="article-title">Lorem Ipsum How You Doin?</h1>
-                        <p class="article-meta">Published on January 12, 2023</p>
-                    </header>
-                    <section class="article-body container-text">
-                        <p class="article-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                            aliquam ipsum a nibh commodo sagittis.
-                            Sed laoreet, erat non consequat bibendum, felis ex pellentesque eros, ut convallis quam
-                            tellus eu
-                            enim. Vivamus bibendum nulla in malesuada suscipit. Suspendisse a bibendum leo.
-                            Phasellus vel dui
-                            vitae enim porttitor luctus. Integer sodales velit nisl, vel ultrices nunc dictum vitae.
-                            Donec
-                            luctus, leo eu congue varius, purus nunc efficitur elit, eu pulvinar nibh libero vel
-                            sapien. Integer
-                            quis urna eros. Nulla posuere turpis justo, non hendrerit tortor mollis vel. Etiam
-                            euismod libero
-                            ipsum, vel consectetur sapien eleifend ac. Donec sollicitudin ante sed malesuada rutrum.
-                            In hac
-                            habitasse platea dictumst.</p>
-                        <p class="article-paragraph">Suspendisse potenti. Nullam sit amet</p>
-                    </section>
-                </article>
-            </section>
-
-            <section class="container">
-                <article class="article-container">
-                    <header class="article-header-container">
-                        <h1 class="article-title">Lorem Ipsum How You Doin?</h1>
-                        <p class="article-meta">Published on January 12, 2023</p>
-                    </header>
-                    <section class="article-body container-text">
-                        <p class="article-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                            aliquam ipsum a nibh commodo sagittis.
-                            Sed laoreet, erat non consequat bibendum, felis ex pellentesque eros, ut convallis quam
-                            tellus eu
-                            enim. Vivamus bibendum nulla in malesuada suscipit. Suspendisse a bibendum leo.
-                            Phasellus vel dui
-                            vitae enim porttitor luctus. Integer sodales velit nisl, vel ultrices nunc dictum vitae.
-                            Donec
-                            luctus, leo eu congue varius, purus nunc efficitur elit, eu pulvinar nibh libero vel
-                            sapien. Integer
-                            quis urna eros. Nulla posuere turpis justo, non hendrerit tortor mollis vel. Etiam
-                            euismod libero
-                            ipsum, vel consectetur sapien eleifend ac. Donec sollicitudin ante sed malesuada rutrum.
-                            In hac
-                            habitasse platea dictumst.</p>
-                        <p class="article-paragraph">Suspendisse potenti. Nullam sit amet</p>
-                    </section>
-                </article>
-            </section>
-
-            <section class="container">
-                <article class="article-container">
-                    <header class="article-header-container">
-                        <h1 class="article-title">My First Blog Post</h1>
-                        <p class="article-meta">Published on January 1, 2023</p>
-                    </header>
-                    <section class="article-body container-text">
-                        <p class="article-paragraph">Chicharrones try-hard polaroid shabby chic hashtag cronut, bicycle
-                            rights XOXO tote bag seitan master cleanse messenger bag. Bruh asymmetrical YOLO pop-up
-                            tacos meggings, drinking vinegar craft beer freegan. Bushwick echo park typewriter
-                            live-edge. Everyday carry tousled man braid, woke squid hexagon tumeric artisan truffaut
-                            schlitz iceland cardigan tilde. Vexillologist narwhal asymmetrical bruh thundercats, selfies
-                            helvetica shoreditch.</p>
-                        <p class="article-paragraph">Suspendisse potenti. Nullam sit amet</p>
-                    </section>
-                </article>
-            </section> -->
         </div>
 
+        <!-- This button will pull more posts using ajax -->
+        <button id="more_posts" class="container">Show More Posts</button>
 
         <footer class="footer">
             <div class="container">
@@ -216,6 +163,7 @@ $result = mysqli_query($conn, $query);
             </div>
         </footer>
     </div>
+
 </body>
 
 
