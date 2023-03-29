@@ -34,15 +34,15 @@ $result = mysqli_query($conn, $query);
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto">
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link text-light" href="about.html"><svg xmlns="http://www.w3.org/2000/svg" width="16"
                             height="16" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
                             <path
                                 d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z" />
                         </svg> About</a>
-                </li>
+                </li> -->
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="profile.html"><svg xmlns="http://www.w3.org/2000/svg"
+                    <a class="nav-link text-light" href="profile.php"><svg xmlns="http://www.w3.org/2000/svg"
                             width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
                             <path fill-rule="evenodd"
@@ -50,23 +50,40 @@ $result = mysqli_query($conn, $query);
                         </svg> Profile</a>
                 </li>
             </ul>
-            <div class="my-2 my-lg-0">
+
+            <!-- This will check if the user is logged, and change navbar accordingly -->
+            <?php if (isset($_SESSION['id'])): ?>
+
+                <div class="my-2 my-lg-0">
+                    <a href="logout.php" class="btn btn-outline-light mr-2">Logout</a>
+                </div>
+
+            <?php else: ?>
+
+                <div class="my-2 my-lg-0">
+                    <a href="auth.php" class="btn btn-outline-light mr-2">Login</a>
+                    <a href="signUp.php" class="btn btn-primary">Sign up</a>
+                </div>
+
+            <?php endif; ?>
+
+            <!-- <div class="my-2 my-lg-0">
                 <a href="auth.php" class="btn btn-outline-light mr-2">Login</a>
                 <a href="signUp.php" class="btn btn-primary">Sign up</a>
-            </div>
+            </div> -->
         </div>
     </nav>
     <div class="main-content-flex">
         <!--Profile Card-->
         <div class="profile-card-flex">
             <div class="profile-card-header">
-                <a class="profile-icon" href="profile.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                <a class="profile-icon" href="profile.php"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg></a>
 
-                <a href="profile.html" class="profile-name">
+                <a href="profile.php" class="profile-name">
                     <?php echo $user_data['fullname']; ?>
                 </a>
             </div>
@@ -126,7 +143,8 @@ $result = mysqli_query($conn, $query);
                             </div>
                             <div class="article-card-body">
                                 <div class="article-card-title">
-                                    <p><a href="post.html">
+                                    <!-- Click would send the id of the post, so that it can be printed post.php -->
+                                    <p><a href="post.php?id=<?php echo $row['id']; ?>">
                                             <?php echo htmlspecialchars($row["title"]); ?>
                                         </a></p>
                                 </div>

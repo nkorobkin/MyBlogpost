@@ -1,3 +1,40 @@
+<?php
+
+session_start();
+
+include("config.php");
+include("functions.php");
+
+ $user_data = check_login($conn);
+
+ //$logged_user = $user_data['id']; 
+
+// $query = "SELECT p.id, p.title, p.content, p.created_at, u.fullname FROM posts p INNER JOIN users u ON p.user_id = u.id WHERE p.user_id = '$user_data[id]' ORDER BY p.created_at DESC";
+// $result = mysqli_query($conn, $query);
+
+if(isset($_GET['id'])) {
+    $post_id = $_GET['id'];
+
+    $stmt = $conn->prepare("SELECT * FROM posts WHERE id = ?");
+    $stmt->bind_param("i", $post_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $post = $result->fetch_assoc();
+    } else {
+        echo "No post found.";
+    }
+
+    $stmt->close();
+    $conn->close();
+} else {
+    echo "Invalid request. Post id is missing.";
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,22 +48,22 @@
 
 <body>
     <nav class="navbar navbar-expand-xl navbar-dark spacer-nav layer-nav">
-        <a class="navbar-brand" href="index.html">My Blog</a>
+        <a class="navbar-brand" href="index.php">My Blog</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto">
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link text-light" href="about.html"><svg xmlns="http://www.w3.org/2000/svg" width="16"
                             height="16" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
                             <path
                                 d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z" />
                         </svg> About</a>
-                </li>
+                </li> -->
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="profile.html"><svg xmlns="http://www.w3.org/2000/svg"
+                    <a class="nav-link text-light" href="profile.php"><svg xmlns="http://www.w3.org/2000/svg"
                             width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
                             <path fill-rule="evenodd"
@@ -34,21 +71,39 @@
                         </svg> Profile</a>
                 </li>
             </ul>
-            <div class="my-2 my-lg-0">
+
+            <?php if (isset($_SESSION['id'])): ?>
+
+                <div class="my-2 my-lg-0">
+                    <a href="logout.php" class="btn btn-outline-light mr-2">Logout</a>
+                </div>
+
+            <?php else: ?>
+
+                <div class="my-2 my-lg-0">
+                    <a href="auth.php" class="btn btn-outline-light mr-2">Login</a>
+                    <a href="signUp.php" class="btn btn-primary">Sign up</a>
+                </div>
+
+            <?php endif; ?>
+
+            <!-- <div class="my-2 my-lg-0">
                 <a href="auth.html" class="btn btn-outline-light mr-2">Login</a>
                 <a href="signUp.html" class="btn btn-primary">Sign up</a>
-            </div>
+            </div> -->
         </div>
     </nav>
     <div class="main-content-flex">
         <div class="profile-card-flex">
             <div class="profile-card-header">
-                <a class="profile-icon" href="profile.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                <a class="profile-icon" href="profile.php"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg></a>
-                <a href="profile.html" class="profile-name">John Doe</a>
+                <a href="profile.php" class="profile-name">
+                    <?php echo $user_data['fullname']; ?>
+                </a>
             </div>
 
             <div class="profile-meta">
@@ -76,26 +131,9 @@
         <div class="article-flex">
             <div class="article-container">
                 <div class="article-content glass-effect">
-                    <h1 class="article-title">Legalize Vegan Diesel</h1>
+                    <h1 class="article-title"><?php echo htmlspecialchars($post["title"]); ?></h1>
                     <div class="article-text">
-                        <p>The benefits of vegan diesel are endless. Reduced carbon emissions, no more deforestation for
-                            dirty fuel, and it's 100% sustainable! HELLO, Mother Earth is practically begging us to
-                            embrace this green gold. It's time to ditch those fossil fuels and stop feeding the evil oil
-                            corporations that are, quite literally, choking the life out of our planet.
-
-                            Now, let's talk about the skeptics, or as I like to call them, the luddites. They're living
-                            in the dark ages, clinging to their outdated, destructive ways like a hipster to their vinyl
-                            collection. Newsflash: fossil fuels are going the way of the dinosaurs, and it's time for
-                            you to evolve, my friends!
-
-                            The vegan revolution is here, and it's not just about what we put in our mouths; it's about
-                            the way we live, breathe, and literally DRIVE! The future is plant-powered, and there's no
-                            stopping this green machine. We've got the power to change the world, one vegetable at a
-                            time, and it starts with vegan diesel.
-
-                            So, if you're not on board with this eco-conscious, life-altering movement, it's time to
-                            reevaluate your priorities. We're fighting for a cleaner, greener, and cruelty-free future,
-                            and we won't back down. Viva La Vegan Vendetta, indeed!</p>
+                        <p><?php echo htmlspecialchars($post["content"]); ?></p>
                     </div>
                     <div class="article-meta">
                         <div class="meta-item">
