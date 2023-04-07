@@ -59,6 +59,37 @@ body {
     z-index: 2;
 }
 
+/* Navbar search starts here, for some reason it doesn't work though. */
+.navbar-search {
+    max-width: 300px;
+    margin-right: 16px;
+    display: flex;
+    flex-grow: 1;
+}
+
+.search-input {
+    width: 100%;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #eceff2;
+    background-color: #ffffff09;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 20px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.search-button {
+    padding: 6px 12px;
+    margin-right: 10px;
+    width: fit-content;
+    border-radius: 20px;
+    background-color: #ffffff09;
+    border-color: #ffffff63;
+    color: #ffffff;
+}
+/* Navbar search ends here. */
 
 .card-body {
     background-color: #f8f9fa;
@@ -244,3 +275,4 @@ body {
         font-size: 14px;
     }
 }
+

@@ -65,8 +65,8 @@ $result = mysqli_query($conn, $query);
                             </svg> My Library</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="profile.php"><svg xmlns="http://www.w3.org/2000/svg"
-                                width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <a class="nav-link text-light" href="profile.php"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
                                 <path fill-rule="evenodd"
                                     d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
@@ -89,13 +89,23 @@ $result = mysqli_query($conn, $query);
             <!-- This will check if the user is logged, and change navbar accordingly -->
             <?php if (isset($_SESSION['id'])): ?>
 
+                <div class="navbar-search">
+                    <input type="search" class="search-input" placeholder="Search...">
+                </div>
+
                 <div class="my-2 my-lg-0">
+                    <button class="search-button" type="submit">Search</button>
                     <a href="logout.php" class="btn btn-outline-light mr-2">Logout</a>
                 </div>
 
             <?php else: ?>
 
+                <div class="navbar-search">
+                    <input type="search" class="search-input" placeholder="Search...">
+                </div>
+
                 <div class="my-2 my-lg-0">
+                    <button class="search-button" type="submit">Search</button>
                     <a href="auth.php" class="btn btn-outline-light mr-2">Login</a>
                     <a href="signUp.php" class="btn btn-primary">Sign up</a>
                 </div>
@@ -150,7 +160,24 @@ $result = mysqli_query($conn, $query);
                             <section class="article-body container-text">
                                 <p class="article-paragraph">
                                     <?php echo htmlspecialchars($row["content"]); ?>
+
+                                    <!-- //!If the user is admin, allow him to delete the posts. -->
+                                    <?php if ((int)$_SESSION['id'] === 1): ?>
+
+                                        <span><button
+                                                style="border: none; background: none; color: red; cursor: pointer; padding: 0; margin-left: 98%;"><svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
+                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"
+                                                    style="margin-left:98%;">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                                </svg></button></span>
+
+                                    <?php endif; ?>
+
+
                                 </p>
+
                             </section>
                         </article>
                     </section>
@@ -162,8 +189,8 @@ $result = mysqli_query($conn, $query);
 
         </div>
 
-        <!-- This button will pull more posts using ajax -->
-        <button id="more_posts" class="container">Show More Posts</button>
+        <!-- //TODO: This button will pull more posts using ajax -->
+        <!-- <button id="more_posts" class="container">Show More Posts</button> -->
 
         <footer class="footer">
             <div class="container">
@@ -183,3 +210,11 @@ $result = mysqli_query($conn, $query);
     crossorigin="anonymous"></script>
 
 </html>
+
+<!-- <span><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
+                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"
+                                    style="margin-left:98%;">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                </svg></span> -->
