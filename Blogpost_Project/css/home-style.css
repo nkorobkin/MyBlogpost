@@ -277,6 +277,10 @@ a {
     
 }*/
 
+.bin-icon {
+    background-image: url('/svg/trash-2.svg');
+}
+
 .layer-body {
     background-image: url('/svg/layer2.svg');
 }
