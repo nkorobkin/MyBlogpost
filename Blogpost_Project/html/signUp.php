@@ -41,6 +41,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-6 col-md-8 col-sm-10">
+                
                 <!-- This is a main signup form -->
                 <form class="mt-5" method="post">
                     <h3 class="text-center mb-4">Sign Up</h3>

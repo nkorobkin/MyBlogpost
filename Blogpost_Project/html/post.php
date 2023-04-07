@@ -5,14 +5,14 @@ session_start();
 include("config.php");
 include("functions.php");
 
- $user_data = check_login($conn);
+$user_data = check_login($conn);
 
- //$logged_user = $user_data['id']; 
+//$logged_user = $user_data['id']; 
 
 // $query = "SELECT p.id, p.title, p.content, p.created_at, u.fullname FROM posts p INNER JOIN users u ON p.user_id = u.id WHERE p.user_id = '$user_data[id]' ORDER BY p.created_at DESC";
 // $result = mysqli_query($conn, $query);
 
-if(isset($_GET['id'])) {
+if (isset($_GET['id'])) {
     $post_id = $_GET['id'];
 
     $stmt = $conn->prepare("SELECT * FROM posts WHERE id = ?");
@@ -22,14 +22,51 @@ if(isset($_GET['id'])) {
 
     if ($result && mysqli_num_rows($result) > 0) {
         $post = $result->fetch_assoc();
+
+        // Second statement to pull the comments for the specific post from db
+        $stmt2 = $conn->prepare("SELECT comments.*, users.username FROM comments INNER JOIN users ON comments.user_id = users.id WHERE comments.post_id = ? ORDER BY comments.created_at DESC"); //SELECT * FROM comments WHERE post_id = ?
+        $stmt2->bind_param("i", $post_id);
+        $stmt2->execute();
+        $comments_result = $stmt2->get_result();
+
+        $comments = [];
+        if ($comments_result && mysqli_num_rows($comments_result) > 0) {
+            while ($row = $comments_result->fetch_assoc()) {
+                $comments[] = $row;
+            }
+        } else {
+            echo "No comments found for this post.";
+        }
+
+        $stmt2->close();
+
     } else {
         echo "No post found.";
     }
 
     $stmt->close();
-    $conn->close();
+    
 } else {
     echo "Invalid request. Post id is missing.";
+}
+
+if (isset($_POST['submit_comment'])) {
+    $post_id = $_POST['post_id'];
+    $comment_text = $_POST['comment_text'];
+    $user_id = $user_data['id'];
+
+    $stmt = $conn->prepare("INSERT INTO comments (user_id, post_id, content, created_at) VALUES (?, ?, ?, NOW())");
+    $stmt->bind_param("iis", $user_id, $post_id, $comment_text);
+
+    if ($stmt->execute()) {
+        // Refresh the page after successfully adding the comment
+        header("Location: " . $_SERVER['PHP_SELF'] . "?id=" . $post_id);
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+
+    $stmt->close();
+    $conn->close();
 }
 
 
@@ -63,8 +100,8 @@ if(isset($_GET['id'])) {
                         </svg> About</a>
                 </li> -->
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="profile.php"><svg xmlns="http://www.w3.org/2000/svg"
-                            width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <a class="nav-link text-light" href="profile.php"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                            height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
                             <path fill-rule="evenodd"
                                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
@@ -131,9 +168,13 @@ if(isset($_GET['id'])) {
         <div class="article-flex">
             <div class="article-container">
                 <div class="article-content glass-effect">
-                    <h1 class="article-title"><?php echo htmlspecialchars($post["title"]); ?></h1>
+                    <h1 class="article-title">
+                        <?php echo htmlspecialchars($post["title"]); ?>
+                    </h1>
                     <div class="article-text">
-                        <p><?php echo htmlspecialchars($post["content"]); ?></p>
+                        <p>
+                            <?php echo htmlspecialchars($post["content"]); ?>
+                        </p>
                     </div>
                     <div class="article-meta">
                         <div class="meta-item">
@@ -164,16 +205,56 @@ if(isset($_GET['id'])) {
                             </button>
                         </div>
                         <div class="meta-item">
-                            <span>· 17/03/2023</span>
+                            <span>
+                                <?php echo date("F j, Y", strtotime($post["created_at"])); ?>
+                            </span>
                         </div>
                     </div>
-                    <div class="comment-form-flex">
-                        <textarea class="comment-input" rows="5" placeholder="Type your comment here..."></textarea>
-                        <button type="submit" class="comment-submit">Comment</button>
-                    </div>
+
+                    <form method="post">
+                        <div class="comment-form-flex">
+                            <textarea name="comment_text" class="comment-input" rows="5" placeholder="Type your comment here..."></textarea>
+                            <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
+                            <button type="submit" name="submit_comment" class="comment-submit">Comment</button>
+                        </div>
+                    </form>
+
                 </div>
             </div>
-            <div class="comments-section ">
+
+            <!-- PHP Comment Section Start -->
+            <?php
+            if (!empty($comments)) {
+                echo '<div class="comments-section">';
+
+                foreach ($comments as $comment) {
+                    echo '<div class="comment">';
+                    echo '<div class="article-profile-icon">';
+                    echo '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">';
+                    echo '<path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />';
+                    echo '</svg>';
+                    echo '</div>';
+                    echo '<div class="comment-content">';
+                    echo '<p>User: ' . htmlspecialchars($comment['username']) . '<span id="comment-date"> · ' . htmlspecialchars(date("d/m/Y", strtotime($comment['created_at']))) . '</span></p>';
+                    echo '<p class="comment-text">' . htmlspecialchars($comment['content']) . '</p>';
+                    echo '<button class="reply-btn">';
+                    echo '<svg class="reply-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">';
+                    echo '<path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />';
+                    echo '</svg><span> Reply</span>';
+                    echo '</button>';
+                    echo '</div>';
+                    echo '</div>';
+                }
+
+                echo '</div>';
+            } else {
+                echo "No comments found for this post.";
+            }
+            ?>
+            <!-- PHP Comment Section Finished -->
+
+            <!-- Comment Section Start -->
+            <!-- <div class="comments-section ">
 
                 <div class="comment">
                     <div class="article-profile-icon">
@@ -200,7 +281,9 @@ if(isset($_GET['id'])) {
                         </button>
                     </div>
                 </div>
-            </div>
+            </div> -->
+            <!-- Comment Section Finished -->
+
         </div>
 
         <!-- Copy the script tags from the library page -->

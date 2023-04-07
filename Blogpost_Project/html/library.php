@@ -129,10 +129,13 @@ $result = mysqli_query($conn, $query);
             </div>
 
             <!-- Fetching user's article from the db -->
+            <!-- //TODO: Move to the article card  -->
+
             <?php if ($result && mysqli_num_rows($result) > 0): ?>
                 <?php while ($row = $result->fetch_assoc()): ?>
 
                     <div class="article-card">
+                        
                         <div class="article-card-structure">
                             <div class="article-profile-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
