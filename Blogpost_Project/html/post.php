@@ -5,7 +5,21 @@ session_start();
 include("config.php");
 include("functions.php");
 
-$user_data = check_login($conn);
+//$user_data = check_login($conn);
+
+if(isset($_SESSION['id'])) {
+
+    $id = $_SESSION['id'];
+    $query = "select * from users where id = '$id' limit 1";
+
+    $result = mysqli_query($conn, $query);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $user_data = mysqli_fetch_assoc($result);
+        
+    }
+
+}
 
 //$logged_user = $user_data['id']; 
 
@@ -139,7 +153,13 @@ if (isset($_POST['submit_comment'])) {
                             d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg></a>
                 <a href="profile.php" class="profile-name">
-                    <?php echo $user_data['fullname']; ?>
+                <?php if (isset($_SESSION['id'])) {
+                    echo $user_data['fullname'];
+                } else {
+                    echo "John Doe";
+                }
+                ?>
+                    
                 </a>
             </div>
 
@@ -210,7 +230,7 @@ if (isset($_POST['submit_comment'])) {
                             </span>
                         </div>
                     </div>
-
+                    <?php if (isset($_SESSION['id'])): ?>
                     <form method="post">
                         <div class="comment-form-flex">
                             <textarea name="comment_text" class="comment-input" rows="5" placeholder="Type your comment here..."></textarea>
@@ -218,6 +238,7 @@ if (isset($_POST['submit_comment'])) {
                             <button type="submit" name="submit_comment" class="comment-submit">Comment</button>
                         </div>
                     </form>
+                    <?php endif; ?>
 
                 </div>
             </div>
