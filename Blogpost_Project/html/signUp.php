@@ -10,10 +10,11 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $user_name = $_POST['user_name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $fullname = $_POST['fullname'];
 
-    if(!empty($user_name) && !empty($email) && !empty($password) && !is_numeric($user_name)) {
+    if(!empty($user_name) && !empty($email) && !empty($password) && !is_numeric($user_name) && !empty($fullname)) {
 
-        $query = "insert into users (username, email, password) values ('$user_name', '$email', '$password')";
+        $query = "insert into users (fullname, username, email, password) values ('$fullname', '$user_name', '$email', '$password')";
 
         mysqli_query($conn, $query);
 
@@ -45,6 +46,11 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                 <!-- This is a main signup form -->
                 <form class="mt-5" method="post">
                     <h3 class="text-center mb-4">Sign Up</h3>
+                    <div class="form-group mb-3">
+                        <!-- Full Name of the User -->
+                        <label for="fullname" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Enter your full name">
+                    </div>
                     <div class="form-group mb-3">
                         <!-- Full Name of the User (I am changing to be the user name. Full name can be implemented later as there is no need for it now) -->
                         <label for="name" class="form-label">Username</label>
