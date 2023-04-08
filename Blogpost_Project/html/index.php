@@ -6,8 +6,34 @@ include("config.php");
 include("functions.php");
 
 
-$query = "SELECT p.id, p.title, p.content, p.created_at, u.fullname FROM posts p INNER JOIN users u ON p.user_id = u.id ORDER BY p.created_at DESC";
-$result = mysqli_query($conn, $query);
+// Get the search query from the URL
+$search_query = isset($_GET['search']) ? trim($_GET['search']) : '';
+
+if ($search_query) {
+
+    $query = "SELECT p.id, p.title, p.content, p.created_at, u.fullname FROM posts p INNER JOIN users u ON p.user_id = u.id WHERE p.title LIKE ? ORDER BY p.created_at DESC";
+
+    // Prepare the SQL statement
+    $stmt = mysqli_prepare($conn, $query);
+
+    // Bind the search parameter to the SQL statement
+    $search_param = "%" . $search_query . "%";
+    mysqli_stmt_bind_param($stmt, 's', $search_param);
+
+    // Execute the SQL statement
+    mysqli_stmt_execute($stmt);
+
+    // Get the result of the SQL statement
+    $result = mysqli_stmt_get_result($stmt);
+    
+} else {
+
+    $query = "SELECT p.id, p.title, p.content, p.created_at, u.fullname FROM posts p INNER JOIN users u ON p.user_id = u.id ORDER BY p.created_at DESC";
+    $result = mysqli_query($conn, $query);
+
+}
+
+
 
 
 // * Just some useful debugging statements casually saving my sanity. 
@@ -33,7 +59,7 @@ if (isset($_GET['action']) && $_GET['action'] === "delete" && isset($_GET['id'])
         //Redirect to the same page after deleting the post
         header("Location: index.php");
     } else {
-       echo "Error: " . $stmt->error;
+        echo "Error: " . $stmt->error;
     }
 
     $stmt->close();
@@ -119,23 +145,23 @@ if (isset($_GET['action']) && $_GET['action'] === "delete" && isset($_GET['id'])
             <!-- This will check if the user is logged, and change navbar accordingly -->
             <?php if (isset($_SESSION['id'])): ?>
 
-                <div class="navbar-search">
-                    <input type="search" class="search-input" placeholder="Search...">
-                </div>
+                <form action="index.php" method="GET" class="navbar-search">
+                    <input type="search" name="search" class="search-input" placeholder="Search...">
+                    <button class="search-button" type="submit">Search</button>
+                </form>
 
                 <div class="my-2 my-lg-0">
-                    <button class="search-button" type="submit">Search</button>
                     <a href="logout.php" class="btn btn-outline-light mr-2">Logout</a>
                 </div>
 
             <?php else: ?>
 
-                <div class="navbar-search">
+                <form action="index.php" method="GET" class="navbar-search">
                     <input type="search" class="search-input" placeholder="Search...">
-                </div>
+                    <button class="search-button" type="submit">Search</button>
+                </form>
 
                 <div class="my-2 my-lg-0">
-                    <button class="search-button" type="submit">Search</button>
                     <a href="auth.php" class="btn btn-outline-light mr-2">Login</a>
                     <a href="signUp.php" class="btn btn-primary">Sign up</a>
                 </div>
@@ -179,9 +205,7 @@ if (isset($_GET['action']) && $_GET['action'] === "delete" && isset($_GET['id'])
                     <section class="container">
                         <article class="article-container">
                             <header class="article-header-container">
-                                <h2 class="article-title">
-                                <a href="post.php?id=<?php echo $row['id']; ?>"><?php echo htmlspecialchars($row["title"]); ?></a>
-                                </h2>
+                                <h2 class="article-title"><a href="post.php?id=<?php echo $row['id']; ?>"><?php echo htmlspecialchars($row["title"]); ?></a></h2>
                                 <p class="article-meta">Posted by
                                     <?php echo htmlspecialchars($row["fullname"]); ?> on
                                     <?php echo date("F j, Y, g:i a", strtotime($row["created_at"])); ?>
