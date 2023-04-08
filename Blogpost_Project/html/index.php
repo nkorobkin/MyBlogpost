@@ -161,13 +161,13 @@ if (isset($_GET['action']) && $_GET['action'] === "delete" && isset($_GET['id'])
 
             <?php else: ?>
 
-                <div class="my-2 my-lg-0">
+                <!-- <div class="my-2 my-lg-0">
                     <a href="newPost.php" class="btn btn-outline-light mr-2">New Post</a>
                     <br>
-                </div>
+                </div> -->
 
                 <form action="index.php" method="GET" class="navbar-search">
-                    <input type="search" class="search-input" placeholder="Search...">
+                    <input type="search" name="search" class="search-input" placeholder="Search...">
                     <button class="search-button" type="submit">Search</button>
                 </form>
 
@@ -226,7 +226,7 @@ if (isset($_GET['action']) && $_GET['action'] === "delete" && isset($_GET['id'])
                                     <?php echo htmlspecialchars($row["content"]); ?>
 
                                     <!-- //!If the user is admin, allow him to delete the posts. -->
-                                    <?php if ((int) $_SESSION['id'] === 1): ?>
+                                    <?php if (isset($_SESSION['id']) && (int) $_SESSION['id'] === 1): ?>
 
                                         <!-- //? Having a hard time understanding wtf is going on below? Me too. Works though! =) -->
 
