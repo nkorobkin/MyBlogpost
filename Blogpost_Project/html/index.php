@@ -9,6 +9,36 @@ include("functions.php");
 $query = "SELECT p.id, p.title, p.content, p.created_at, u.fullname FROM posts p INNER JOIN users u ON p.user_id = u.id ORDER BY p.created_at DESC";
 $result = mysqli_query($conn, $query);
 
+
+// * Just some useful debugging statements casually saving my sanity. 
+// var_dump($_GET);
+
+// echo "<br>";
+// echo "isset(\$_GET['action']): " . (isset($_GET['action']) ? "true" : "false") . "<br>";
+// echo "\$_GET['action'] === 'delete': " . (($_GET['action'] ?? "") === "delete" ? "true" : "false") . "<br>";
+// echo "isset(\$_GET['id']): " . (isset($_GET['id']) ? "true" : "false") . "<br>";
+
+// Check for the delete action and post id
+if (isset($_GET['action']) && $_GET['action'] === "delete" && isset($_GET['id'])) {
+
+    // echo "Action: " . $_GET['action'] . " | ID: " . $_GET['id'];
+
+    $post_id = $_GET['id'];
+
+    // Prepare a statement to delete the post from the database
+    $stmt = $conn->prepare("DELETE FROM posts WHERE id = ?");
+    $stmt->bind_param("i", $post_id);
+
+    if ($stmt->execute()) {
+        //Redirect to the same page after deleting the post
+        header("Location: index.php");
+    } else {
+       echo "Error: " . $stmt->error;
+    }
+
+    $stmt->close();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -150,7 +180,7 @@ $result = mysqli_query($conn, $query);
                         <article class="article-container">
                             <header class="article-header-container">
                                 <h2 class="article-title">
-                                    <?php echo htmlspecialchars($row["title"]); ?>
+                                <a href="post.php?id=<?php echo $row['id']; ?>"><?php echo htmlspecialchars($row["title"]); ?></a>
                                 </h2>
                                 <p class="article-meta">Posted by
                                     <?php echo htmlspecialchars($row["fullname"]); ?> on
@@ -162,22 +192,22 @@ $result = mysqli_query($conn, $query);
                                     <?php echo htmlspecialchars($row["content"]); ?>
 
                                     <!-- //!If the user is admin, allow him to delete the posts. -->
-                                    <?php if ((int)$_SESSION['id'] === 1): ?>
+                                    <?php if ((int) $_SESSION['id'] === 1): ?>
 
-                                        <span><button
-                                                style="border: none; background: none; color: red; cursor: pointer; padding: 0; margin-left: 98%;"><svg
-                                                    xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
-                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"
-                                                    style="margin-left:98%;">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                                                </svg></button></span>
+                                        <!-- //? Having a hard time understanding wtf is going on below? Me too. Works though! =) -->
+
+                                        <span><a href="index.php?id=<?php echo $row['id']; ?>&action=delete"
+                                                onclick="return confirmDelete();"><button
+                                                    style="border: none; background: none; color: red; cursor: pointer; padding: 0; margin-left: 98%;"><svg
+                                                        xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
+                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"
+                                                        style="margin-left:98%;">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                                    </svg></button></a></span>
 
                                     <?php endif; ?>
-
-
                                 </p>
-
                             </section>
                         </article>
                     </section>
@@ -199,6 +229,19 @@ $result = mysqli_query($conn, $query);
         </footer>
     </div>
 
+    <script>
+        function confirmDelete() {
+            // Display a confirmation dialog
+            if (window.confirm("Are you sure you want to delete this post?")) {
+                // If the admin user clicks "OK", proceed with the delete action
+                return true;
+            } else {
+                // If the admin user clicks "Cancel", prevent the delete action
+                return false;
+            }
+        }
+    </script>
+
 </body>
 
 
@@ -210,11 +253,3 @@ $result = mysqli_query($conn, $query);
     crossorigin="anonymous"></script>
 
 </html>
-
-<!-- <span><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
-                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"
-                                    style="margin-left:98%;">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                                </svg></span> -->
