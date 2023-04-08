@@ -35,7 +35,7 @@ if (isset($_GET['id'])) {
                 $comments[] = $row;
             }
         } else {
-            echo "No comments found for this post.";
+            // echo "No comments found for this post.";
         }
 
         $stmt2->close();
@@ -248,7 +248,11 @@ if (isset($_POST['submit_comment'])) {
 
                 echo '</div>';
             } else {
+                echo '<div class="comments-section">';
+                echo '<div class="comment-content">';
                 echo "No comments found for this post.";
+                echo '</div>';
+                echo '</div>';
             }
             ?>
             <!-- PHP Comment Section Finished -->

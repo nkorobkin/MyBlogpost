@@ -25,7 +25,7 @@ if ($search_query) {
 
     // Get the result of the SQL statement
     $result = mysqli_stmt_get_result($stmt);
-    
+
 } else {
 
     $query = "SELECT p.id, p.title, p.content, p.created_at, u.fullname FROM posts p INNER JOIN users u ON p.user_id = u.id ORDER BY p.created_at DESC";
@@ -145,6 +145,11 @@ if (isset($_GET['action']) && $_GET['action'] === "delete" && isset($_GET['id'])
             <!-- This will check if the user is logged, and change navbar accordingly -->
             <?php if (isset($_SESSION['id'])): ?>
 
+                <div class="my-2 my-lg-0">
+                    <a href="newPost.php" class="btn btn-outline-light mr-2">New Post</a>
+                    <br>
+                </div>
+
                 <form action="index.php" method="GET" class="navbar-search">
                     <input type="search" name="search" class="search-input" placeholder="Search...">
                     <button class="search-button" type="submit">Search</button>
@@ -155,6 +160,11 @@ if (isset($_GET['action']) && $_GET['action'] === "delete" && isset($_GET['id'])
                 </div>
 
             <?php else: ?>
+
+                <div class="my-2 my-lg-0">
+                    <a href="newPost.php" class="btn btn-outline-light mr-2">New Post</a>
+                    <br>
+                </div>
 
                 <form action="index.php" method="GET" class="navbar-search">
                     <input type="search" class="search-input" placeholder="Search...">
